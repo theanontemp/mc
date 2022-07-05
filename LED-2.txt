@@ -1,0 +1,9 @@
+.include "M32DEF.inc"
+.ORG 0
+;---------Setting Port B as output-----------------
+LDI R16,0XFF
+OUT DDRB,R16
+;-------sending 11011011 to port B
+LDI R16,0B11011011
+OUT PORTB,R16
+L: RJMP L 

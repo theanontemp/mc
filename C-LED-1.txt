@@ -1,0 +1,7 @@
+#include <avr/io.h> // standard AVR header
+int main(void)
+{
+DDRB = 0xff; // setting PORTB as output
+PORTB = 0B01010101; // setting value for PORTB
+while (1); // indefinite loop
+}

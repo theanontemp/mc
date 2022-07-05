@@ -1,0 +1,19 @@
+#include <avr/io.h>
+#define DATA1 7
+#define DATA2 3
+#define DATA3 0xff
+#define DATA4 0x1
+#define DATA5 5
+#define DATA6 2
+int main(void)
+{
+    DDRB=0xff;
+    DDRC=0xff;
+    DDRD=0xff;
+    
+    PORTB=DATA1+DATA2;
+    PORTC=DATA3-DATA4;
+    PORTD=DATA5*DATA6;
+    while(1)
+    return 0;
+}

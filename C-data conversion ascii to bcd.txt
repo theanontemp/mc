@@ -1,0 +1,17 @@
+#include <avr/io.h>
+int main(void)
+{
+unsigned char bcdbyte;
+unsigned char w = '4';
+unsigned char z = '7';
+DDRB = 0xFF;
+w = w & 0x0F;
+w = w << 4;
+z = z & 0x0F;
+bcdbyte = w | z;
+PORTB = bcdbyte;
+ /* Replace with your application code */
+ while (1)
+ {
+ }
+}

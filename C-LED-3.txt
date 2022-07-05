@@ -1,0 +1,17 @@
+#include <avr/io.h> 				// standard AVR header
+#include<util/delay.h> 			// delay header file
+#define F_CPU 1000000UL 		/* it tells the compiler that the MC running at 1MHz. */
+int main(void)
+{
+	unsigned char z; 				// defining data variable z
+	DDRB = 0xFF;					 // setting PORTB as output
+	while(1) 						// infinite loop
+	{
+		for(z=0;z<256;z++) 		// data z varies from 0 to 255
+		{
+			PORTB = z;				 // sending z to PORTB
+			_delay_ms(10000); 	// time in ms
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,22 @@
+#include <avr/io.h>
+void ToDelay(); //declaration of timer0 delay function
+int main(void)
+{
+ DDRB |= (1<<3); // PORTB.3 outputport
+
+ while(1)
+ {
+ PORTB |= (1<<3); // outing 1 to PB3
+ ToDelay(); // calling delay
+ PORTB &= !(1<<3); // outing 0 to PB3
+ ToDelay(); // calling delay
+ }
+}
+void ToDelay()
+{
+TCNT0 = 0x80; // load timer TCNT with initial value
+TCCR0 = 0x01; // Timer0, Normal mode, no prescaler
+while((TIFR&0x01)==0); // wait for TOV0 flag to rollover
+TCCR0 = 0; // stop timer
+TIFR = 1; // clear TOV0 flag
+}

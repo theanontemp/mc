@@ -1,0 +1,47 @@
+.include "M32DEF.inc"
+.ORG 0 ; starting address of the code
+
+;---------Initializing STACK POINTER with last SRAM location ----
+	LDI R16, HIGH(RAMEND)
+	OUT SPH, R16
+	LDI R16, LOW(RAMEND)
+	OUT SPL, R16
+
+;---------Setting Port B as output-----------------
+	LDI R16,0XFF
+	OUT DDRB,R16
+
+;---------Setting Port D as input-----------------
+	OUT PORTD,R16 ; activating pull up register
+	LDI R16,0X00
+	OUT DDRD,R16
+
+;-------INPUTTING AND OUTPUTTING --------------
+L:
+	IN R16, PIND ; Load Data from Port D to R16
+	COM R16 ; complementing R16
+	OUT PORTB,R16 ; sending R16 to output Port B
+	CALL DELAY ; Calling delay
+	RJMP L
+
+;-------------DELAY SUBROUTINE --------------------------
+
+; --- Adjust the initial values of R17, R18, R19 to correct delay
+
+.ORG 0X300
+	DELAY: LDI R17, 0X1
+	AGAIN1: LDI R18, 0X1
+	AGAIN2: LDI R19, 0XF
+	AGAIN3: NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	DEC R19
+	BRNE AGAIN3
+	DEC R18
+	BRNE AGAIN2
+	DEC R17
+	BRNE AGAIN1
+	RET
